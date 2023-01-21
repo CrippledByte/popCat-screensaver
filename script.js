@@ -8,10 +8,7 @@ function (callback) {
 
 // Create image and set to default if invalid input provided
 var image = new Image()
-image.src = prompt('Enter an image URL')
-image.onerror = function () {
-  image.src = './default.svg'
-}
+image.src = './popCat-off.png';
 
 // Ensure canvas shape has same dimensions as image
 image.onload = function () {
@@ -38,7 +35,9 @@ function display (rect, canvas, context) {
   var speed = 5
 
   // If image hits top
+  let hit = false;
   if (rect.y <= 0) {
+    hit = true;
     if (direction === 'ne') {
       direction = 'se'
     } else if (direction === 'nw') {
@@ -47,6 +46,7 @@ function display (rect, canvas, context) {
 
   // If image hits bottom
   } else if (rect.y >= canvas.height - rect.height) {
+    hit = true;
     if (direction === 'se') {
       direction = 'ne'
     } else if (direction === 'sw') {
@@ -55,6 +55,7 @@ function display (rect, canvas, context) {
 
   // If image hits left
   } else if (rect.x <= 0) {
+    hit = true;
     if (direction === 'nw') {
       direction = 'ne'
     } else if (direction === 'sw') {
@@ -63,11 +64,33 @@ function display (rect, canvas, context) {
 
   // If image hits right
   } else if (rect.x >= canvas.width - rect.width) {
+    hit = true;
     if (direction === 'ne') {
       direction = 'nw'
     } else if (direction === 'se') {
       direction = 'sw'
     }
+  }
+
+  if (hit) {
+    let duration = 0;
+
+    // check if popcat is already on
+    if (image.src === './popCat-on.png') {
+      duration = 10;
+    }
+
+    image.src = './popCat-off.png';
+
+    // turn popcat off for 10 ms if already on
+    setTimeout(() => {
+      image.src = './popCat-on.png';
+    }, duration);
+
+    // turn popcat on for 100 ms
+    setTimeout(() => {
+      image.src = './popCat-off.png';
+    }, 100 + duration);
   }
 
   // Now to define what the directions actually mean
