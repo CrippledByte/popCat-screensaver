@@ -6,9 +6,21 @@ function (callback) {
 }
 })()
 
+let is_on = false;
+
+function popCatOff() {
+  is_on = false;
+  image.src = './popCat-off.png';
+}
+
+function popCatOn() {
+  is_on = true;
+  image.src = './popCat-on.png';
+}
+
 // Create image and set to default if invalid input provided
 var image = new Image()
-image.src = './popCat-off.png';
+popCatOff();
 
 // Ensure canvas shape has same dimensions as image
 image.onload = function () {
@@ -83,21 +95,21 @@ function display (rect, canvas, context) {
     let duration = 0;
 
     // check if popcat is already on
-    if (image.src === './popCat-on.png') {
+    if (is_on) {
       duration = 10;
     }
 
-    image.src = './popCat-off.png';
+    popCatOff();
     clearTimeout(pop_timeout);
     pop_timeout = null;
 
     // turn popcat off for 10 ms if already on
     setTimeout(() => {
-      image.src = './popCat-on.png';
+      popCatOn();
 
       // turn popcat on for 100 ms
       pop_timeout = setTimeout(() => {
-        image.src = './popCat-off.png';
+        popCatOff();
       }, 100 + duration);
     }, duration);
   }
