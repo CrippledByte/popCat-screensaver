@@ -46,13 +46,17 @@ var direction = 'se'
 let prev_time = new Date();
 let pop_timeout = null;
 
+// Get speed from url
+const urlParams = new URLSearchParams(window.location.search);
+const speed_original = urlParams.get('speed') || 3;
+
 function display (rect, canvas, context) {
   let curr_time = new Date();
   let time_diff = curr_time - prev_time;
   prev_time = curr_time;
 
   const speed_modifier = time_diff / (1000 / 60);
-  let speed = 3 * speed_modifier;
+  let speed = speed_original * speed_modifier;
 
   // If image hits top
   let hit = false;
