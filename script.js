@@ -31,6 +31,7 @@ function showImage (rect, context) {
 // Movement
 var direction = 'se'
 let prev_time = new Date();
+let pop_timeout = null;
 
 function display (rect, canvas, context) {
   let curr_time = new Date();
@@ -87,16 +88,18 @@ function display (rect, canvas, context) {
     }
 
     image.src = './popCat-off.png';
+    clearTimeout(pop_timeout);
+    pop_timeout = null;
 
     // turn popcat off for 10 ms if already on
     setTimeout(() => {
       image.src = './popCat-on.png';
-    }, duration);
 
-    // turn popcat on for 100 ms
-    setTimeout(() => {
-      image.src = './popCat-off.png';
-    }, 100 + duration);
+      // turn popcat on for 100 ms
+      pop_timeout = setTimeout(() => {
+        image.src = './popCat-off.png';
+      }, 100 + duration);
+    }, duration);
   }
 
   // Now to define what the directions actually mean
