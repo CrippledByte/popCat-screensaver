@@ -11,11 +11,15 @@ let is_on = false;
 function popCatOff() {
   is_on = false;
   image.src = './popCat-off.png';
+  setTimeout(() => {
+    document.getElementById('favicon').setAttribute('href', './popCat-off.png');
+  }, 200);
 }
 
 function popCatOn() {
   is_on = true;
   image.src = './popCat-on.png';
+  document.getElementById('favicon').setAttribute('href', './popCat-on.png');
 }
 
 // Create image and set to default if invalid input provided
@@ -31,9 +35,6 @@ image.onload = function () {
 // Hide and append image
 image.style.display = 'none'
 document.body.appendChild(image)
-
-// Set favicon
-document.getElementById('favicon').setAttribute('href', image.src)
 
 // Draw image on canvas
 function showImage (rect, context) {
