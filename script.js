@@ -52,7 +52,7 @@ function display (rect, canvas, context) {
   prev_time = curr_time;
 
   const speed_modifier = time_diff / (1000 / 60);
-  let speed = 5 * speed_modifier;
+  let speed = 3 * speed_modifier;
 
   // If image hits top
   let hit = false;
