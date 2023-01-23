@@ -1,3 +1,3 @@
-# dvd-screensaver-customizable
+# popCat-screensaver
 
-[View on GitHub Pages](https://forkpoweroutlet.github.io/dvd-screensaver-customizable) or download the repository if you're really that bored.
+[View live page](https://popcat.crippled.dev/) or download the repository if you really like popCat.
